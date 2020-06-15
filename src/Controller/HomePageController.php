@@ -12,10 +12,7 @@ class HomePageController extends AbstractController
      */
     public function index()
     {
-        $user = $this->getUser();
-
         return $this->render('home_page/index.html.twig', [
-            'controller_name' => $user->getUsername(),
         ]);
     }
 }
