@@ -2,6 +2,7 @@
 
 namespace App\Menu;
 
+use http\Url;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
@@ -23,25 +24,24 @@ class MenuBuilder
 
     public function createMainMenu(RequestStack $requestStack)
     {
-        $menu = $this->factory->createItem('myAccount');
+        $menu = $this->factory->createItem('mainMenu');
         $user = $this->security->getUser();
 
         $menu->addChild('Home', ['route' => 'app_home']);
         if ($user === null) {
             $menu->addChild('Login', ['route' => 'app_login']);
         } else {
-            $menu->addChild('Logout', ['route' => 'app_logout']);
             $menu->addChild('My Account', ['route' => 'app_myAccount']);
+            $menu->addChild('Logout', ['route' => 'app_logout']);
         }
         return $menu;
     }
 
-    public function createSidebarMenu(RequestStack $requestStack)
+    public function createMyAccountMenu(RequestStack $requestStack)
     {
-        $menu = $this->factory->createItem('sidebar');
+        $menu = $this->factory->createItem('myAccountMenu');
 
-        $menu->addChild('Home', ['route' => 'homepage']);
-        // ... add more children
+        $menu->addChild('Change my data', ['route' => 'homepage']);
 
         return $menu;
     }

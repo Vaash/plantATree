@@ -8,8 +8,9 @@
         {% endblock %}
     </head>
     <body>
-        {{ knp_menu_render('main') }}
-        {% block body %}{% endblock %}
+        {{ knp_menu_render('mainMenu') }}
+        {% block body %}
+        {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

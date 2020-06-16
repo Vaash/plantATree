@@ -15,14 +15,14 @@ services:
         factory: ["@app.menu_builder", createMainMenu]
         arguments: ["@request_stack"]
         tags:
-            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+            - { name: knp_menu.menu, alias: mainMenu } # The alias is what is used to retrieve the menu
 
-    app.sidebar_menu:
+    app.my_account_menu:
         class: Knp\Menu\MenuItem
-        factory: ["@app.menu_builder", createSidebarMenu]
+        factory: ["@app.menu_builder", createMyAccountMenu]
         arguments: ["@request_stack"]
         tags:
-            - { name: knp_menu.menu, alias: sidebar }
+            - { name: knp_menu.menu, alias: myAccountMenu }
 
     # default configuration for services in *this* file
     _defaults:
