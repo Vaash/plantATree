@@ -31,7 +31,7 @@ class MenuBuilder
         if ($user === null) {
             $menu->addChild('Login', ['route' => 'app_login']);
         } else {
-            $menu->addChild('My Account', ['route' => 'app_myAccount']);
+            $menu->addChild('My Account', ['route' => 'app_account']);
             $menu->addChild('Logout', ['route' => 'app_logout']);
         }
         return $menu;
@@ -41,7 +41,7 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('myAccountMenu');
 
-        $menu->addChild('Change my data', ['route' => 'homepage']);
+        $menu->addChild('Change my data', ['route' => 'app_account_update']);
 
         return $menu;
     }

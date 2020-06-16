@@ -22,7 +22,7 @@ services:
         factory: ["@app.menu_builder", createMyAccountMenu]
         arguments: ["@request_stack"]
         tags:
-            - { name: knp_menu.menu, alias: myAccountMenu }
+            - { name: knp_menu.menu, alias: accountMenu }
 
     # default configuration for services in *this* file
     _defaults:

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MyAccountController extends AbstractController
 {
     /**
-     * @Route("/", name="app_myAccount")
+     * @Route("/", name="app_account")
      */
     public function index()
     {
