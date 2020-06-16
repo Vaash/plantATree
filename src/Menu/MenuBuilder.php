@@ -30,6 +30,7 @@ class MenuBuilder
         $menu->addChild('Home', ['route' => 'app_home']);
         if ($user === null) {
             $menu->addChild('Login', ['route' => 'app_login']);
+            $menu->addChild('Sign up', ['route' => 'app_register']);
         } else {
             $menu->addChild('My Account', ['route' => 'app_account']);
             $menu->addChild('Logout', ['route' => 'app_logout']);
