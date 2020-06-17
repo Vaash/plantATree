@@ -34,6 +34,9 @@ class MenuBuilder
         } else {
             $menu->addChild('My Account', ['route' => 'app_account']);
             $menu->addChild('Logout', ['route' => 'app_logout']);
+            if ($this->security->isGranted('ROLE_ADMIN')) {
+                $menu->addChild('Admin', ['route' => 'app_admin']);
+            }
         }
         return $menu;
     }

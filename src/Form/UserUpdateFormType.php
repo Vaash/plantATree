@@ -24,15 +24,6 @@ class UserUpdateFormType extends AbstractType
             ->add('first_name')
             ->add('last_name')
             ->add('birth_date', BirthdayType::class)
-            ->add('email')
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
-            ])
         ;
     }
 

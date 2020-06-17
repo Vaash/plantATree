@@ -6,10 +6,6 @@
         {{ form_row(userUpdateForm.first_name) }}
         {{ form_row(userUpdateForm.last_name) }}
         {{ form_row(userUpdateForm.birth_date) }}
-        {{ form_row(userUpdateForm.email) }}
-        {{ form_row(userUpdateForm.password, {
-            label: 'Confirm Password'
-        }) }}
         <button type="submit" class="btn">Update</button>
     {{ form_end(userUpdateForm) }}
 {% endblock %}

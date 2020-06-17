@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserUpdateFormType;
+use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,7 @@ class MyAccountController extends AbstractController
      */
     public function update(Request $request)
     {
+        /** @var User $user */
         $user = $this->getUser();
         $form = $this->createForm(UserUpdateFormType::class, $user);
         $form->handleRequest($request);
