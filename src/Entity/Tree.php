@@ -18,12 +18,12 @@ class Tree
     private $id;
 
     /**
-     * @ORM\Column(type="float", columnDefinition="FLOAT")
+     * @ORM\Column(type="decimal", precision=15, scale=12)
      */
     private $longitude;
 
     /**
-     * @ORM\Column(type="float", columnDefinition="FLOAT")
+     * @ORM\Column(type="decimal", precision=15, scale=12)
      */
     private $latitude;
 
@@ -43,24 +43,24 @@ class Tree
         return $this->id;
     }
 
-    public function getLongitude(): ?int
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
-    public function setLongitude(int $longitude): self
+    public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
 
         return $this;
     }
 
-    public function getLatitude(): ?int
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    public function setLatitude(int $latitude): self
+    public function setLatitude(float $latitude): self
     {
         $this->latitude = $latitude;
 

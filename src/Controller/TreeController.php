@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/tree")
- * @method addTree()
  */
 class TreeController extends AbstractController
 {
@@ -59,14 +58,12 @@ class TreeController extends AbstractController
      */
     public function myTrees(Request $request)
     {
-        $user = $this->getUser();
 
         $treeRepository = $this->getDoctrine()->getRepository(Tree::class);
         $treeList = $treeRepository->findAll();
 
         return $this->render('tree/trees.html.twig', [
-            'treeList' => $treeList,
-            'username' => $user,
+            'treeList' => $treeList
         ]);
     }
 
@@ -82,9 +79,9 @@ class TreeController extends AbstractController
 
         for ($i = 0; $i < 21; $i++) {
             $tree = new Tree();
-            $tree->setLatitude('1234.34');
-            $tree->setLongitude('1234.35');
-//            $tree->setDate();
+            $tree->setLatitude(36.54367);
+            $tree->setLongitude(36.46886);
+            $tree->setDate(new \DateTime());
             $tree->setUser($user);
 
             $entityManager->persist($tree);
