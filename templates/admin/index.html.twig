@@ -3,10 +3,6 @@
 {% block title %}Plant A Tree | Admin Dashboard{% endblock %}
 
 {% block admin %}
-    <h1>
-        Hi {{ adminName }}
-    </h1>
-
     {% for flashError in app.flashes('error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}

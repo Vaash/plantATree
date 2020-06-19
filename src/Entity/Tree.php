@@ -18,12 +18,12 @@ class Tree
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float", columnDefinition="FLOAT")
      */
     private $longitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float", columnDefinition="FLOAT")
      */
     private $latitude;
 
@@ -31,11 +31,6 @@ class Tree
      * @ORM\Column(type="date")
      */
     private $date;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $userType;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="trees")
@@ -80,18 +75,6 @@ class Tree
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getUserType(): ?bool
-    {
-        return $this->userType;
-    }
-
-    public function setUserType(bool $userType): self
-    {
-        $this->userType = $userType;
 
         return $this;
     }

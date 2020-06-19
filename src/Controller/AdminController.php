@@ -22,8 +22,6 @@ class AdminController extends AbstractController
      */
     public function index(Request $request)
     {
-        $admin = $this->getUser();
-
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $userList = $userRepository->findAll();
 
@@ -40,11 +38,7 @@ class AdminController extends AbstractController
             array_push($arrayOfForms, $viewForm);
         }
 
-//        dump($request);
-//        die;
-
         return $this->render('admin/index.html.twig', [
-            'adminName' => $admin->getUsername(),
             'userList' => $userList,
             'userRoleChangeFormArray' => $arrayOfForms
         ]);

@@ -1,0 +1,13 @@
+{% extends 'tree/base.html.twig' %}
+
+{% block tree %}
+    <h1>Plant a tree!</h1>
+    {{ form_start(plantTreeForm) }}
+        {{ form_row(plantTreeForm.longitude) }}
+        {{ form_row(plantTreeForm.latitude) }}
+        {{ form_row(plantTreeForm.date) }}
+        <button type="submit" class="btn btn-success">Plant</button>
+    {{ form_end(plantTreeForm) }}
+{% endblock %}
+
+

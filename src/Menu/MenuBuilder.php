@@ -34,6 +34,7 @@ class MenuBuilder
         } else {
             $menu->addChild('My Account', ['route' => 'app_account']);
             $menu->addChild('Logout', ['route' => 'app_logout']);
+            $menu->addChild('Plant A Tree!', ['route' => 'app_plant_a_tree']);
             if ($this->security->isGranted('ROLE_ADMIN')) {
                 $menu->addChild('Admin', ['route' => 'app_admin']);
             }
@@ -46,6 +47,7 @@ class MenuBuilder
         $menu = $this->factory->createItem('myAccountMenu');
 
         $menu->addChild('Change my data', ['route' => 'app_account_update']);
+        $menu->addChild('My trees', ['route' => 'app_trees']);
 
         return $menu;
     }
