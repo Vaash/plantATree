@@ -1,1 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: forestgreen !important;
+}
+
+.treeAmount {
+  position: relative;
+}
+
+#mapId {
+  height: 550px;
+  position: relative;
+  width: 700px;
+}

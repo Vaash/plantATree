@@ -10,25 +10,29 @@
         <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
     {% endfor %}
 
-    <h3>list of users</h3>
-    <ul>
+    <div class="container" style="width: 30rem;">
+        <h3>List of users</h3>
+        <ul>
 
-        {% for user in userList %}
-            <li>{{ user.id }} - {{ user.firstname }} - {{ user.lastname }} - {{ user.email }}</li>
 
-            {% for role in user.roles %}
-                {{ role }}
+            {% for user in userList %}
+                <li>{{ user.id }} - {{ user.firstname }} - {{ user.lastname }} - {{ user.email }}</li>
+
+                {% for role in user.roles %}
+                    {{ role }}
+                {% endfor %}
+
+                <a href="{{ path('app_admin_delete_user', {'id': user.id }) }}" class="btn btn-danger">X</a>
+
+                {% set form = userRoleChangeFormArray[loop.index-1] %}
+
+                {{ form_start(form) }}
+                {{ form_row(form.roles) }}
+                <button type="submit" class="btn btn-success">Update</button>
+                {{ form_end(form) }}
+
             {% endfor %}
+        </ul>
+    </div>
 
-            <a href="{{ path('app_admin_delete_user', {'id': user.id }) }}" class="btn btn-danger">X</a>
-
-            {% set form = userRoleChangeFormArray[loop.index-1] %}
-
-            {{ form_start(form) }}
-            {{ form_row(form.roles) }}
-            <button type="submit" class="btn btn-success">Update</button>
-            {{ form_end(form) }}
-
-        {% endfor %}
-    </ul>
 {% endblock %}

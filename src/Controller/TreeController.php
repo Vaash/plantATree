@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/tree")
+ * @Route("/my_account")
  */
 class TreeController extends AbstractController
 {
