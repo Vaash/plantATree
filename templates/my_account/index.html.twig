@@ -1,7 +1,112 @@
 {% extends 'my_account/base.html.twig' %}
 
 {% block account %}
-    <h1>
-        Hello {{ username }}!
-    </h1>
+
+    <div class="container" style="width: 30rem;">
+        <div class="row">
+            <div class="col col-3">
+
+            </div>
+            <div class="col col-9"></div>
+        </div>
+        <h1>Hello {{ username }}</h1>
+        <h3>List of trees.</h3>
+        <ul>
+            {% for tree in treeList %}
+                <li>{{ tree.id }} - {{ tree.longitude }} - {{ tree.latitude }} - {{ tree.date | date("d/m/Y") }}</li>
+                <a href="{{ path('app_trees_delete_tree', {'id': tree.id }) }}" class="btn btn-danger">X</a>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="mapAccountId" class="map"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+
+        if (document.getElementById('mapAccountId')) {
+
+            let myAccountMap = L.map('mapAccountId', {drawControl: true}).setView([47.219568, 2.588194], 6);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoidmFhc2giLCJhIjoiY2ticW9saGxmMXFsczJxcG9pdm1tdHhhaCJ9.FY98gEYe63iJUubsFtv9dw'
+            }).addTo(myAccountMap);
+
+            // map is above.
+
+            var editableLayers = new L.FeatureGroup();
+            myAccountMap.addLayer(editableLayers);
+
+            var MyCustomMarker = L.Icon.extend({
+                options: {
+                    shadowUrl: null,
+                    iconAnchor: new L.Point(12, 12),
+                    iconSize: new L.Point(24, 24),
+                    // iconUrl: 'link/to/image.png'
+                }
+            });
+
+            let options = {
+                position: 'topright',
+                draw: {
+                    polyline: {
+                        shapeOptions: {
+                            color: '#f357a1',
+                            weight: 10
+                        }
+                    },
+                    polygon: {
+                        allowIntersection: false, // Restricts shapes to simple polygons
+                        drawError: {
+                            color: '#e1e100', // Color the shape will turn when intersects
+                            message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+                        },
+                        shapeOptions: {
+                            color: '#bada55'
+                        }
+                    },
+                    circle: false, // Turns off this drawing tool
+                    rectangle: {
+                        shapeOptions: {
+                            clickable: false
+                        }
+                    },
+                    marker: {
+                        icon: new MyCustomMarker()
+                    }
+                },
+                edit: {
+                    featureGroup: editableLayers, //REQUIRED!!
+                    remove: false
+                }
+            };
+
+            let drawControl = new L.Control.Draw(options);
+            myAccountMap.addControl(drawControl);
+
+            myAccountMap.on(L.Draw.Event.CREATED, function (e) {
+                let type = e.layerType,
+                    layer = e.layer;
+
+                if (type === 'marker') {
+                    layer.bindPopup('A popup!');
+                }
+
+                editableLayers.addLayer(layer);
+            });
+
+            {% for tree in treeList %}
+            L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(myAccountMap);
+            {% endfor %}
+        }
+    </script>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tree;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserUpdateFormType;
@@ -23,10 +24,15 @@ class MyAccountController extends AbstractController
      */
     public function index()
     {
+        /** @var User $user */
         $user = $this->getUser();
+
+        $treeRepository = $this->getDoctrine()->getRepository(Tree::class);
+        $treeList = $treeRepository->findBy(['user' => $user->getId()]);
 
         return $this->render('my_account/index.html.twig', [
             'username' => $user->getUsername(),
+            'treeList' => $treeList
         ]);
     }
 

@@ -9,6 +9,10 @@
     {% block account %}
     {% endblock %}
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{#    {{ encore_entry_script_tags('account') }}#}
+{% endblock %}
 
 
 

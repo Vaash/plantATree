@@ -17,12 +17,16 @@ class HomePageController extends AbstractController
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
         $trees = $this->getDoctrine()->getRepository(Tree::class)->findAll();
 
+        $treeRepository = $this->getDoctrine()->getRepository(Tree::class);
+        $treeList = $treeRepository->findAll();
+
         $numberOfUsers = count($users);
         $numberOfTrees = count($trees);
 
         return $this->render('home_page/index.html.twig', [
             'numberOfTrees' => $numberOfTrees,
-            'numberOfUsers' => $numberOfUsers
+            'numberOfUsers' => $numberOfUsers,
+            'treeList' => $treeList
         ]);
     }
 }

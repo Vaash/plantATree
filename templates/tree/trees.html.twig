@@ -10,6 +10,7 @@
         <ul>
             {% for tree in treeList %}
                 <li>{{ tree.id }} - {{ tree.longitude }} - {{ tree.latitude }} - {{ tree.date | date("d/m/Y") }}</li>
+                <a href="{{ path('app_trees_delete_tree', {'id': tree.id }) }}" class="btn btn-danger">X</a>
             {% endfor %}
         </ul>
     </div>

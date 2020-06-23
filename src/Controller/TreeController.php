@@ -22,7 +22,7 @@ class TreeController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('tree/index.html.twig', [
-            'username' => $user->getUsername(),
+            'username' => $user->getUsername()
         ]);
     }
 
@@ -65,6 +65,25 @@ class TreeController extends AbstractController
         return $this->render('tree/trees.html.twig', [
             'treeList' => $treeList
         ]);
+    }
+
+    /**
+     * @Route("/trees/delete/{id}", name="app_trees_delete_tree")
+     * @param $id
+     */
+    public function deleteTree($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $tree = $this->getDoctrine()->getRepository(Tree::class)->find($id);
+        if ($tree !== null) {
+            $entityManager->remove($tree);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Tree successfully deleted');
+        } else {
+            $this->addFlash('error', 'Tree doesnt exist.');
+        }
+        return $this->redirectToRoute('app_trees');
     }
 
     /**
