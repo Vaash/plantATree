@@ -15,18 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class TreeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_tree")
-     */
-    public function index()
-    {
-        $user = $this->getUser();
-
-        return $this->render('tree/index.html.twig', [
-            'username' => $user->getUsername()
-        ]);
-    }
-
-    /**
      * @Route("/plant_a_tree", name="app_plant_a_tree")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -41,28 +29,23 @@ class TreeController extends AbstractController
         $form = $this->createForm(PlantTreeFormType::class, $tree);
         $form->handleRequest($request);
 
+        $treeRepository = $this->getDoctrine()->getRepository(Tree::class);
+        $treeList = $treeRepository->findBy(['user' => $user->getId()]);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $tree->setDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tree);
             $entityManager->flush();
+            $treeList = $treeRepository->findBy(['user' => $user->getId()]);
+
+            $this->addFlash('success', 'We will plant this tree !');
+        } elseif ($form->isSubmitted() && $form === null) {
+            $this->addFlash('error', 'An error occurred, please try again.');
         }
 
         return $this->render('tree/plant.html.twig', [
             'plantTreeForm' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/trees", name="app_trees")
-     * @param Request $request
-     */
-    public function myTrees(Request $request)
-    {
-
-        $treeRepository = $this->getDoctrine()->getRepository(Tree::class);
-        $treeList = $treeRepository->findAll();
-
-        return $this->render('tree/trees.html.twig', [
             'treeList' => $treeList
         ]);
     }
@@ -79,11 +62,11 @@ class TreeController extends AbstractController
             $entityManager->remove($tree);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Tree successfully deleted');
+            $this->addFlash('success', 'Tree successfully deleted.');
         } else {
             $this->addFlash('error', 'Tree doesnt exist.');
         }
-        return $this->redirectToRoute('app_trees');
+        return $this->redirectToRoute('app_account');
     }
 
     /**
@@ -106,6 +89,6 @@ class TreeController extends AbstractController
             $entityManager->persist($tree);
         }
         $entityManager->flush();
-        return $this->redirectToRoute('app_tree');
+        return $this->redirectToRoute('app_account');
     }
 }

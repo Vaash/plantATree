@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // encode the password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -52,10 +52,12 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'You have been registered, welcome to Plant A Tree !');
+
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('bastien.delboe@gmail.com', 'AdminBastien'))
+                    ->from(new Address('noReply@pantATree.com', 'Admin'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
@@ -67,6 +69,8 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
+        } elseif ($form->isSubmitted() && $form === null) {
+            $this->addFlash('error', 'Something went wrong, please try again.');
         }
 
         return $this->render('registration/register.html.twig', [

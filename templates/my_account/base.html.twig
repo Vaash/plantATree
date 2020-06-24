@@ -6,6 +6,16 @@
 
 {% block body %}
     {{ knp_menu_render('accountMenu') }}
+
+    {% for flashError in app.flashes('error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    {% for flashSuccess in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+    {% endfor %}
+
+{#  MESSAGES D'ERREURS  #}
+
     {% block account %}
     {% endblock %}
 {% endblock %}

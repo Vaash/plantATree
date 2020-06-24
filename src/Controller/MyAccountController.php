@@ -31,7 +31,7 @@ class MyAccountController extends AbstractController
         $treeList = $treeRepository->findBy(['user' => $user->getId()]);
 
         return $this->render('my_account/index.html.twig', [
-            'username' => $user->getUsername(),
+            'username' => $user->getFirstName(),
             'treeList' => $treeList
         ]);
     }
@@ -52,6 +52,8 @@ class MyAccountController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->addFlash('success', 'User updated !');
         }
 
         return $this->render('my_account/update.html.twig', [

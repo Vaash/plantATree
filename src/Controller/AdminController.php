@@ -50,8 +50,10 @@ class AdminController extends AbstractController
      */
     public function deleteUser($id)
     {
+
         $em = $this->getDoctrine()->getManager();
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
         if ($user !== null) {
             $em->remove($user);
             $em->flush();

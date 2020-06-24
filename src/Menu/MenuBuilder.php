@@ -47,7 +47,6 @@ class MenuBuilder
         $menu = $this->factory->createItem('myAccountMenu');
 
         $menu->addChild('Change my data', ['route' => 'app_account_update']);
-        $menu->addChild('My trees', ['route' => 'app_trees']);
 
         return $menu;
     }

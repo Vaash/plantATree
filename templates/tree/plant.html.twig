@@ -1,18 +1,66 @@
-{% extends 'tree/base.html.twig' %}
+{% extends 'my_account/base.html.twig' %}
 
-{% block tree %}
-    <div class="container" style="width: 30rem;">
+{% block account %}
+    <div class="container">
         <h1>Plant a tree!</h1>
+        <div id="mapPlantATree" class="map"></div>
         {{ form_start(plantTreeForm) }}
         {{ form_row(plantTreeForm.longitude) }}
-
         {{ form_row(plantTreeForm.latitude) }}
-
-        {{ form_row(plantTreeForm.date) }}
-
         <button type="submit" class="btn btn-success">Plant</button>
         {{ form_end(plantTreeForm) }}
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+        if (document.getElementById('mapPlantATree')) {
+
+            let plantATreeMap = L.map('mapPlantATree', {drawControl: true}).setView([47.219568, 2.588194], 6);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoidmFhc2giLCJhIjoiY2ticW9saGxmMXFsczJxcG9pdm1tdHhhaCJ9.FY98gEYe63iJUubsFtv9dw'
+            }).addTo(plantATreeMap);
+
+            // map is above.
+
+            let editableLayers = new L.FeatureGroup();
+            plantATreeMap.addLayer(editableLayers);
+
+            let longInput = document.getElementById('plant_tree_form_longitude');
+            let latInput = document.getElementById('plant_tree_form_latitude');
+
+            plantATreeMap.on(L.Draw.Event.CREATED, function (e) {
+                console.log(e);
+
+                longInput.value = e.layer._latlng.lng;
+                latInput.value = e.layer._latlng.lat;
+
+                let type = e.layerType,
+                    layer = e.layer;
+
+                if (type === 'marker') {
+                    layer.bindPopup('A popup!');
+                }
+
+                editableLayers.addLayer(layer);
+            });
+
+
+            {% for tree in treeList %}
+                L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(plantATreeMap);
+            {% endfor %}
+        }
+    </script>
+{% endblock %}
+
+
 
 
