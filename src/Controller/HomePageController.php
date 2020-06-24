@@ -9,11 +9,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomePageController extends AbstractController
 {
+
+    public $user;
     /**
      * @Route("/", name="app_home")
      */
     public function index()
     {
+        $user = $this->getUser();
+
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
         $trees = $this->getDoctrine()->getRepository(Tree::class)->findAll();
 
@@ -26,7 +30,8 @@ class HomePageController extends AbstractController
         return $this->render('home_page/index.html.twig', [
             'numberOfTrees' => $numberOfTrees,
             'numberOfUsers' => $numberOfUsers,
-            'treeList' => $treeList
+            'treeList' => $treeList,
+            'user' => $user
         ]);
     }
 }

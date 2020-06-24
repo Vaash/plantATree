@@ -1,9 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
 
-body {
-  background-color: forestgreen !important;
-}
-
 .treeAmount {
   justify-content: center;
   display: flex;
@@ -12,5 +8,5 @@ body {
 .map {
   height: 300px;
   margin: 50px auto;
-  width: 80%;
+  width: 70%;
 }

@@ -1,7 +1,9 @@
 {% extends 'my_account/base.html.twig' %}
 
 {% block account %}
-
+<header>
+    {{ knp_menu_render('accountMenu') }}
+</header>
     <div class="container">
         <h1>Hello {{ username }}</h1>
         <div class="row">

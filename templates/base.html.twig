@@ -12,10 +12,26 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
 </head>
+
+<header>
+    <nav class="navbar navbar-expand-sm bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="#">{{ knp_menu_render('mainMenu') }}</a>
+            </li>
+{#            {% if user is not null %}#}
+{#            <li class="nav-item">#}
+{#                <a href="#">{{ knp_menu_render('accountMenu') }}</a>#}
+{#            </li>#}
+{#            {% endif %}#}
+        </ul>
+    </nav>
+</header>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    {{ knp_menu_render('mainMenu') }}
-</nav>
+<img src="" alt="">
+{#<nav class="navbar navbar-expand-lg navbar-light bg-light">#}
+{#    {{ knp_menu_render('mainMenu') }}#}
+{#</nav>#}
 {% block body %}
 {% endblock %}
 </body>
