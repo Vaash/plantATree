@@ -33,6 +33,15 @@ class TreeController extends AbstractController
         $treeList = $treeRepository->findBy(['user' => $user->getId()]);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($tree->getLatitude() === null || $tree->getLongitude() === null) {
+                $this->addFlash('error', 'You need to select a location.');
+
+                return $this->render('tree/plant.html.twig', [
+                    'plantTreeForm' => $form->createView(),
+                    'treeList' => $treeList
+                ]);
+            }
             $tree->setDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tree);
@@ -40,8 +49,6 @@ class TreeController extends AbstractController
             $treeList = $treeRepository->findBy(['user' => $user->getId()]);
 
             $this->addFlash('success', 'We will plant this tree !');
-        } elseif ($form->isSubmitted() && $form === null) {
-            $this->addFlash('error', 'An error occurred, please try again.');
         }
 
         return $this->render('tree/plant.html.twig', [

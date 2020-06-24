@@ -23,8 +23,12 @@ class PlantTreeFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('longitude', HiddenType::class)
-            ->add('latitude', HiddenType::class)
+            ->add('longitude', HiddenType::class, [
+                'constraints' => new NotBlank()
+            ])
+            ->add('latitude', HiddenType::class, [
+                'constraints' => new NotBlank()
+            ])
         ;
     }
 

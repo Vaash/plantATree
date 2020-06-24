@@ -32,10 +32,6 @@ class UserRoleChangeFormType extends AbstractType
                             (
                                 'Yes' => 'ROLE_ADMIN',
                             ),
-                            'ROLE_PLANTER' => array
-                            (
-                                'Yes' => 'ROLE_PLANTER'
-                            ),
                             'ROLE_DONATOR' => array
                             (
                                 'Yes' => 'ROLE_DONATOR'
