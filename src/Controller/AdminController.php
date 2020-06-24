@@ -96,6 +96,8 @@ class AdminController extends AbstractController
         $form = $this->createForm(UserRoleChangeFormType::class, $user);
         $form->handleRequest($request);
 
+//        dump($form, $user);
+//        die;
         if ($form->isSubmitted() && $form->isValid()) {
             $userId = $request->query->get('id');
             $userToChange = $this->getDoctrine()->getRepository(User::class)->find($userId);
@@ -109,6 +111,8 @@ class AdminController extends AbstractController
 
                 $this->addFlash('success', 'Success');
             }
+        } else {
+            $this->addFlash('error', 'Error');
         }
         return $this->redirectToRoute('app_admin');
     }

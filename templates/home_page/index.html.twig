@@ -3,18 +3,24 @@
 {% block title %}Plant A Tree | Homepage{% endblock %}
 
 {% block body %}
-
-    <div class="treeAmount">
-        <h3>So far, {{ numberOfTrees }} trees have been planted by {{ numberOfUsers }} users. Well done !</h3>
+    <div class="home-image">
+        <img src="{{ asset('img/Nature.jpg') }}" alt="Home image nature">
+    </div>
+    <div class="container">
+        <div class="treeAmount">
+            <h3>So far, {{ numberOfTrees }} trees have been planted by {{ numberOfUsers }} users. Well done !</h3>
+            <br>
+            <h4>Here is a map of all the trees we've planted !</h4>
+        </div>
+        <div id="mapId" class="map big-map"></div>
     </div>
 
-    <div id="mapId" class="map"></div>
 
     {% block javascripts %}
         {{ parent() }}
         <script>
             if (document.getElementById('mapId')) {
-                let myMap = L.map('mapId').setView([47.219568, 2.588194], 6);
+                let myMap = L.map('mapId').setView([47.219568, 2.588194], 3);
 
                 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -26,7 +32,7 @@
                 }).addTo(myMap);
 
                 {% for tree in treeList %}
-                    L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(myMap);
+                L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(myMap);
                 {% endfor %}
             }
         </script>

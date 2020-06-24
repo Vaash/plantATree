@@ -5,8 +5,7 @@ security:
 
     role_hierarchy:
         ROLE_DONATOR:     ROLE_USER
-        ROLE_PLANTER:     ROLE_USER
-        ROLE_ADMIN:       [ROLE_PLANTER, ROLE_DONATOR]
+        ROLE_ADMIN:       [ROLE_DONATOR]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     # enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers

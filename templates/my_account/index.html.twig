@@ -1,28 +1,34 @@
 {% extends 'my_account/base.html.twig' %}
 
 {% block account %}
-<header>
-    {{ knp_menu_render('accountMenu') }}
-</header>
-    <div class="container">
-        <h1>Hello {{ username }}</h1>
-        <div class="row">
-            <div class="col col-12">
-                <h3>Map</h3>
-                <div id="mapAccountId" class="map"></div>
-            </div>
+    <div class="d-flex">
+        <div class="secondary-background account-menu">
+            {{ knp_menu_render('accountMenu') }}
+            {% if treeList | length > 0 %}
+                <h3 style="margin-left: 25%">List of trees.</h3>
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        {% for tree in treeList %}
+                            <li class="list-group-item secondary-background">{{ tree.id }} - {{ tree.date | date("d/m/Y") }}
+                                <a href="{{ path('app_trees_delete_tree', {'id': tree.id }) }}"
+                                   class="btn btn-danger">X</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <span style="margin-left: 15px">You need to plant a tree first!</span>
+            {% endif %}
         </div>
-        <div class="row">
-            <div class="col col-12">
-                <h3>List of trees.</h3>
-                <ul>
-                    {% for tree in treeList %}
-                        <li>{{ tree.id }} - {{ tree.longitude }} - {{ tree.latitude }}
-                            - {{ tree.date | date("d/m/Y") }}</li>
-                        <a href="{{ path('app_trees_delete_tree', {'id': tree.id }) }}" class="btn btn-danger">X</a>
-                    {% endfor %}
-                </ul>
+
+        <div class="container container-colored">
+            <h1>Hello {{ username }}</h1>
+            <div class="row">
+                <div class="col col-12">
+                    <div id="mapAccountId" class="map account-map"></div>
+                </div>
             </div>
+
         </div>
     </div>
 {% endblock %}
@@ -50,7 +56,7 @@
             // map is above.
 
             {% for tree in treeList %}
-                L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(myAccountMap);
+            L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(myAccountMap);
             {% endfor %}
         }
     </script>

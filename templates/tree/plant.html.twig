@@ -2,15 +2,17 @@
 
 {% block account %}
     <div class="container">
-        <h1>Plant a tree!</h1>
-        <br>
-        <p>To plant a tree, select "Draw a marker" in the drawing bar on the left of the map,</p>
-        <p>click where you want to plant this tree and hit plant !</p>
+        <div class="d-flex justify-content-center flex-column align-items-center">
+            <h1 class="h1-padding">Plant a tree!</h1>
+            <br>
+            <p>To plant a tree, select "Draw a marker" in the drawing bar on the left of the map,</p>
+            <p>click where you want to plant this tree and hit plant !</p>
+        </div>
         <div id="mapPlantATree" class="map"></div>
         {{ form_start(plantTreeForm) }}
         {{ form_row(plantTreeForm.longitude) }}
         {{ form_row(plantTreeForm.latitude) }}
-        <button type="submit" class="btn btn-success">Plant</button>
+        <button type="submit" class="btn btn-success" style="margin-left: 78%">Plant</button>
         {{ form_end(plantTreeForm) }}
     </div>
 {% endblock %}
@@ -58,7 +60,7 @@
 
 
             {% for tree in treeList %}
-                L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(plantATreeMap);
+            L.marker([ {{ tree.latitude }}, {{ tree.longitude }}]).addTo(plantATreeMap);
             {% endfor %}
         }
     </script>

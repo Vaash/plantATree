@@ -50,8 +50,6 @@ class User implements UserInterface
     private $trees;
 
     /**
-     * @Assert\NotNull
-     * @Assert\Type("string")
      * @ORM\Column(type="string", length=255)
      */
     private $firstName;

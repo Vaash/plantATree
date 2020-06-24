@@ -1,12 +1,71 @@
 @import "~bootstrap/scss/bootstrap";
 
-.treeAmount {
-  justify-content: center;
-  display: flex;
+.secondary-background {
+  background-color: #c8e6c9 !important;
+}
+
+.account-menu {
+  min-width: 20%;
+}
+
+.container-colored {
+  padding: 25px;
+}
+
+.h1-padding {
+  padding: 20px 0;
+}
+
+.nav-item:not(.current) {
+  .nav-link {
+    color: black !important;
+  }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.navbar-colored {
+  background-color: #97b498 !important;
+}
+
+.home-image {
+  height: 200px;
+  width: 100%;
 }
 
 .map {
   height: 300px;
   margin: 50px auto;
   width: 70%;
+}
+
+.account-map {
+  margin-top: 30px;
+  width: 85%;
+  height: 600px;
+}
+
+.big-map {
+  height: 500px;
+}
+
+.current {
+  a {
+    color: forestgreen !important;
+  }
+
+  font-weight: bold;
+}
+
+.treeAmount {
+  * {
+    color: white;
+  }
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
 }
