@@ -36,6 +36,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function findAllWithTrees()
+    {
+        return $this->createQueryBuilder('u')
+            ->join('u.trees', 't')
+            ->andWhere('t IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /*
+     * ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(10)
+     */
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

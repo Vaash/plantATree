@@ -18,7 +18,7 @@ class HomePageController extends AbstractController
     {
         $user = $this->getUser();
 
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $users = $this->getDoctrine()->getRepository(User::class)->findAllWithTrees();
         $trees = $this->getDoctrine()->getRepository(Tree::class)->findAll();
 
         $treeRepository = $this->getDoctrine()->getRepository(Tree::class);
