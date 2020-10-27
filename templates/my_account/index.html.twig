@@ -1,11 +1,20 @@
 {% extends 'my_account/base.html.twig' %}
 
 {% block account %}
-    <div class="d-flex">
-        <div class="secondary-background account-menu">
+    <div class="d-flex" id="account" >
+        <div class="container container-colored">
+            <h1>Hello {{ username }}</h1>
+            <div class="row">
+                <div class="col col-12">
+                    <div id="mapAccountId" class="map account-map"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accountTreeList secondary-background account-menu">
             {{ knp_menu_render('accountMenu') }}
             {% if treeList | length > 0 %}
-                <h3 style="margin-left: 25%">List of trees.</h3>
+                <h3>List of trees.</h3>
                 <div class="card">
                     <ul class="list-group list-group-flush">
                         {% for tree in treeList %}
@@ -21,15 +30,7 @@
             {% endif %}
         </div>
 
-        <div class="container container-colored">
-            <h1>Hello {{ username }}</h1>
-            <div class="row">
-                <div class="col col-12">
-                    <div id="mapAccountId" class="map account-map"></div>
-                </div>
-            </div>
 
-        </div>
     </div>
 {% endblock %}
 

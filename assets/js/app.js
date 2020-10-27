@@ -1,4 +1,5 @@
 import '../css/app.scss';
+import 'bootstrap'
 
 // if (document.getElementById('mapId')) {
 //     let myMap = L.map('mapId').setView([47.219568, 2.588194], 6);

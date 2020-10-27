@@ -35,15 +35,24 @@
   width: 100%;
 }
 
+.logContainer {
+  margin: auto;
+  max-width: 30rem;
+  form {
+    width: 100%;
+    padding: 15px;
+  }
+}
+
 .map {
   height: 300px;
   margin: 50px auto;
-  width: 70%;
+  //width: 70%;
 }
 
 .account-map {
   margin-top: 30px;
-  width: 85%;
+  //width: 85%;
   height: 600px;
 }
 
@@ -55,7 +64,6 @@
   a {
     color: forestgreen !important;
   }
-
   font-weight: bold;
 }
 
@@ -63,9 +71,42 @@
   * {
     color: white;
   }
-
   align-items: center;
   flex-direction: column;
   justify-content: center;
   display: flex;
+}
+
+.accountTreeList {
+  h3 {
+    justify-content: center;
+    display: flex;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .home-image {
+    display: none;
+  }
+  .treeAmount {
+    padding-top: 25px;
+    * {
+      color: black !important;
+      text-align: center;
+    }
+  }
+  .logContainer {
+  }
+  .map {
+  }
+
+  .accountTreeList {
+    width: 90%;
+  }
+
+  #account {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
