@@ -45,7 +45,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tree::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Tree::class, mappedBy="user", cascade={"remove"})
      */
     private $trees;
 
